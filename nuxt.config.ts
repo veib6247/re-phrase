@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'RE:Phrase | AI-powered rephrasing tool',
+      link: [{ rel: 'icon', href: '/cpu.png' }],
       htmlAttrs: {
         'data-theme': 'black',
       },
