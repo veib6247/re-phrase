@@ -11,10 +11,15 @@ export default defineEventHandler(async (event) => {
 
   const response = await openai.createCompletion({
     model: 'text-davinci-003',
-    prompt: 'Say this is a test',
-    temperature: 0,
-    max_tokens: 7,
+    prompt: `Rephrase this: \n\n${query.userInput}`,
+    temperature: 0.7,
+    max_tokens: 256,
+    top_p: 1,
+    frequency_penalty: 0,
+    presence_penalty: 0,
   })
-  // return { input: query.userInput }
-  return response.data
+
+  console.log(response.data)
+
+  return response.data.choices[0].text
 })

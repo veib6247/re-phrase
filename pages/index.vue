@@ -1,19 +1,24 @@
 <script setup>
   const textInput = ref('')
   const isLoading = ref(false)
+  const aiResponse = ref('')
 
   /**
    *
    */
   const submitInput = async () => {
     isLoading.value = true
+    aiResponse.value = ''
 
     try {
       const { data } = await useFetch('/api/rephrase', {
         query: { userInput: textInput.value },
       })
 
-      console.info(data.value)
+      // remove any extra '\n' or '\r'
+      const cleanString = data.value.replace(/[\n\r]/g, '')
+
+      aiResponse.value = cleanString
     } catch (error) {
       console.error(error)
     } finally {
@@ -38,15 +43,34 @@
             v-model="textInput"></textarea>
         </div>
 
-        <div class="card-actions">
-          <button
-            class="btn-primary btn w-full uppercase"
-            :class="{ loading: isLoading }"
-            @click="submitInput">
-            Rephrase
-          </button>
-        </div>
+        <button
+          class="btn-primary btn w-full uppercase"
+          :class="{ loading: isLoading }"
+          @click="submitInput">
+          Rephrase
+        </button>
+
+        <Transition>
+          <div class="form-control" v-if="aiResponse">
+            <textarea
+              class="textarea-bordered textarea h-72 placeholder-slate-600"
+              v-model="aiResponse"></textarea>
+          </div>
+        </Transition>
       </div>
     </div>
   </div>
 </template>
+
+<style scoped>
+  /* we will explain what these classes do next! */
+  .v-enter-active,
+  .v-leave-active {
+    transition: opacity 0.5s ease;
+  }
+
+  .v-enter-from,
+  .v-leave-to {
+    opacity: 0;
+  }
+</style>
