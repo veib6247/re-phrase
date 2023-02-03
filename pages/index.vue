@@ -13,13 +13,17 @@
     //
     if (textInput.value !== '') {
       try {
+        isLoading.value = true
+
         const { data } = await useFetch('/api/rephrase', {
           query: { userInput: textInput.value },
         })
 
         // remove any extra '\n' or '\r'
-        const cleanString = data.value.replace(/[\n\r]/g, '')
-        aiResponse.value = cleanString
+        // const cleanString = data.value.replace(/[\n\r]/g, '')
+        // aiResponse.value = cleanString
+
+        aiResponse.value = data.value.slice(2)
 
         //
       } catch (error) {
@@ -41,7 +45,6 @@
    * helper func to reset data
    */
   const resetStates = () => {
-    isLoading.value = true
     isInputInvalid.value = false
     aiResponse.value = ''
   }
