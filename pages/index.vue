@@ -73,28 +73,38 @@
         </button>
 
         <Transition>
-          <div class="form-control" v-if="aiResponse">
-            <label class="label">
-              <span class="label-text text-lg font-medium text-teal-300">
-                Open AI Says:
-              </span>
-            </label>
-            <textarea
-              class="textarea-bordered textarea h-72 placeholder-slate-600"
-              v-model="aiResponse"
-              readonly></textarea>
+          <div
+            class="mt-3 rounded-lg bg-gradient-to-r from-slate-900 to-slate-600 p-8 hover:from-slate-900 hover:to-slate-500"
+            v-if="aiResponse">
+            <h1 class="text-2xl font-medium text-white">Open AI</h1>
+
+            <p class="my-1">
+              <span class="text-sm font-medium">GPT-3 model: </span>
+              <span class="font-mono text-sm">text-davinci-003</span>
+            </p>
+
+            <p class="my-1">
+              <span class="text-sm font-medium">temperature: </span>
+              <span class="font-mono text-sm">0.7</span>
+            </p>
+
+            <div class="mt-6">
+              <p class="italic text-white">
+                {{ aiResponse }}
+              </p>
+            </div>
           </div>
         </Transition>
-
-        <div class="text-center">
-          <a
-            class="link gap-2 text-sm uppercase"
-            href="https://github.com/veib6247/re-phrase"
-            target="_blank">
-            Github
-          </a>
-        </div>
       </div>
+    </div>
+
+    <div class="mt-3 text-center">
+      <a
+        class="link gap-2 text-sm uppercase"
+        href="https://github.com/veib6247/re-phrase"
+        target="_blank">
+        Github
+      </a>
     </div>
   </div>
 </template>
