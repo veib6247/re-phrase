@@ -9,17 +9,23 @@ export default defineEventHandler(async (event) => {
 
   const openai = new OpenAIApi(configuration)
 
-  const response = await openai.createCompletion({
-    model: 'text-davinci-003',
-    prompt: `Rephrase this:\n\n${query.userInput}`,
-    temperature: 0.7,
-    max_tokens: 256,
-    top_p: 1,
-    frequency_penalty: 0,
-    presence_penalty: 0,
-  })
+  try {
+    const response = await openai.createCompletion({
+      model: 'text-davinci-003',
+      prompt: `Rephrase this:\n\n${query.userInput}`,
+      temperature: 0.7,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    })
 
-  console.log(response.data)
+    console.log(response.data)
+    return response.data.choices[0].text
 
-  return response.data.choices[0].text
+    //
+  } catch (error) {
+    console.error(error.response.data)
+    return error.response.data
+  }
 })

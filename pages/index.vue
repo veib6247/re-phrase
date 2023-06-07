@@ -23,7 +23,12 @@
         // const cleanString = data.value.replace(/[\n\r]/g, '')
         // aiResponse.value = cleanString
 
-        aiResponse.value = data.value.slice(2)
+        if (data.value.error) {
+          aiResponse.value = data.value.error.message
+        } else {
+
+          aiResponse.value = data.value.slice(2)
+        }
 
         //
       } catch (error) {
@@ -58,17 +63,12 @@
       <div class="card-body">
         <h2 class="card-title text-teal-300">Input Here:</h2>
         <div class="form-control">
-          <textarea
-            class="textarea-bordered textarea h-72 placeholder-slate-600"
-            :class="{ 'textarea-error': isInputInvalid }"
-            placeholder="The quick brown fox..."
-            v-model="textInput"></textarea>
+          <textarea class="textarea-bordered textarea h-72 placeholder-slate-600"
+            :class="{ 'textarea-error': isInputInvalid }" placeholder="The quick brown fox..." v-model="textInput"
+            @keyup.ctrl.enter="submitInput"></textarea>
         </div>
 
-        <button
-          class="btn-primary btn w-full uppercase"
-          :class="{ loading: isLoading }"
-          @click="submitInput">
+        <button class="btn-primary btn w-full uppercase" :class="{ loading: isLoading }" @click="submitInput">
           Rephrase
         </button>
 
@@ -99,10 +99,7 @@
     </div>
 
     <div class="mt-3 text-center">
-      <a
-        class="link gap-2 text-sm uppercase"
-        href="https://github.com/veib6247/re-phrase"
-        target="_blank">
+      <a class="link gap-2 text-sm uppercase" href="https://github.com/veib6247/re-phrase" target="_blank">
         Github
       </a>
     </div>
@@ -110,14 +107,14 @@
 </template>
 
 <style scoped>
-  /* we will explain what these classes do next! */
-  .v-enter-active,
-  .v-leave-active {
-    transition: opacity 0.5s ease;
-  }
+/* we will explain what these classes do next! */
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
 
-  .v-enter-from,
-  .v-leave-to {
-    opacity: 0;
-  }
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 </style>
