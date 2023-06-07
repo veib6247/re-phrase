@@ -90,7 +90,7 @@
 
             <div class="mt-6">
               <p class="italic text-white">
-                {{ aiResponse }}
+                "{{ aiResponse }}"
               </p>
             </div>
           </div>
