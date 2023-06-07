@@ -79,8 +79,8 @@
             <h1 class="text-2xl font-medium text-white">Open AI</h1>
 
             <p class="my-1">
-              <span class="text-sm font-medium">GPT-3 model: </span>
-              <span class="font-mono text-sm">text-davinci-003</span>
+              <span class="text-sm font-medium">AI model: </span>
+              <span class="font-mono text-sm">gpt-3.5-turbo</span>
             </p>
 
             <p class="my-1">

@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const response = await openai.createCompletion({
-      model: 'text-davinci-003',
+      model: 'gpt-3.5-turbo',
       prompt: `Rephrase this:\n\n${query.userInput}`,
       temperature: 0.7,
       max_tokens: 256,
